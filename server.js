@@ -7,10 +7,10 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(__dirname + `/dist/${process.env.project_name}`));
+app.use(express.static(__dirname + `/dist/telecine-app`));
 
 app.get('/*', function(req,res) {
-    res.sendFile(path.join(__dirname+`/dist/${process.env.project_name}/index.html`));
+    res.sendFile(path.join(__dirname+`/dist/telecine-app/index.html`));
 });
 
 // Iniciar aplicação usando a porta padrão do HEROKU

@@ -29,7 +29,7 @@
             ],
             "styles": [
               "src/styles.sass",
-              "src/assets/libs/bootstrap/bootstrap-grid.sass"
+              "src/assets/css/normalize.sass"
             ],
             "scripts": []
           },
