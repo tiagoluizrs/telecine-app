@@ -9,20 +9,23 @@ import { HttpService } from '../../services/Http/http.service';
 })
 export class HomeComponent implements OnInit {
   movies: Array<any> = [];
+  slideConfig: any = {}
 
   constructor(
     private seoService: SeoService,
     private httpService: HttpService
   ){
-    this.setMetaTag();
-    this.getMovies();
   } 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.setMetaTag();
+    this.getMovies();
+  }
 
   getMovies(){
     this.httpService.get("movies").subscribe((data: any) => {
       this.movies = data
+      this.initializeCarousel();
     },(error) => {
         console.log(`[[HomeComponent | getMovies]] >> Um erro ocorreu durante o carregamento dos filmes. Descrição do erro: ${error}`);
       }
@@ -44,4 +47,29 @@ export class HomeComponent implements OnInit {
 
     this.seoService.setMetaTag(data, true);
   }
+
+  initializeCarousel(): void{
+    this.slideConfig = {
+      "arrows": false,
+      "dots": true,
+      "infinite": true,
+      "centerMode": true,
+      "centerPadding": '20px',
+      "variableWidth": true,
+      "slidesToShow": 5,
+      "focusOnSelect": true,
+      "responsive": [
+        {
+          "breakpoint": 768,
+          "settings": {
+            "centerPadding": '40px',
+            "slidesToShow": 3
+          }
+        }
+      ]
+    } 
+  }
+
+  
+  
 }

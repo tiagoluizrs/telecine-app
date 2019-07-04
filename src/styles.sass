@@ -1,14 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+
+// Fontes
 @import 'https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap'
 
+// Estilos de estrutura
 *
     font-family: 'Roboto', sans-serif
+    transition: all ease-out 0.3s
 
 .content
     padding: 
         left: 15px
         right: 15px
 
+.content__fluid
+    padding: 
+        left: 0
+        right: 0
+
+
+// Estilos de botões
 .button
     border: none
     border:
@@ -19,7 +30,59 @@
         size: 1.1em
     &:hover
         cursor: pointer
-
 .button__red
     background:
         color: #e53e34
+
+/* Estilos do carrosel */
+.slick-slide
+    margin: 0 20px
+    box:
+        shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.8)
+
+.slick-dots
+    position: relative !important
+    bottom: 0 !important
+    width: 90% !important
+    margin:
+        left: 5% !important
+        right: 5% !important
+
+.slick-dotted
+    &.slick-slider
+    margin-bottom: 0px !important
+
+.slick-center
+    -webkit-transform: scale(1.10)
+    -moz-transform: scale(1.10)
+    transform: scale(1.10)   
+    margin-top: -10px
+ 
+
+.slick-list 
+    padding: 45px 60px !important
+
+.slick-dots 
+    li 
+        &.slick-active
+            width: 45px !important
+            button
+                width: 45px !important
+                &::before
+                    width: 45px !important
+                    background:
+                        color: #fff !important
+        width: 35px !important
+        height: 10px !important
+        button
+            width: 35px !important
+            height: 10px !important
+            &::before
+                background:
+                    color: #242429 !important
+                border:
+                    radius: 30px !important
+                width: 35px !important
+                height: 10px !important
+                content: "" !important
+                opacity: 1 !important
