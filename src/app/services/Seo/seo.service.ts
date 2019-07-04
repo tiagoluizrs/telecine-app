@@ -18,7 +18,7 @@ export class SeoService {
       els = this.meta.getTags(tag_name);
       return els;
     } catch (error) {
-      console.log(`[[updateMetaTags]] >> Um erro ocorreu durante a criação das meta tags. Descrição do erro: ${error}`);
+      console.log(`[[SeoService | getMetaTags]] >> Um erro ocorreu durante a criação das meta tags. Descrição do erro: ${error}`);
       return {
         'name': undefined,
         'content': undefined
@@ -30,7 +30,7 @@ export class SeoService {
     try {
       this.meta.addTags(data, force);
     } catch (error) {
-      console.log(`[[updateMetaTags]] >> Um erro ocorreu durante a criação das meta tags. Descrição do erro: ${error}`);
+      console.log(`[[SeoService | setMetaTag]] >> Um erro ocorreu durante a criação das meta tags. Descrição do erro: ${error}`);
     } 
   }
 
@@ -38,7 +38,7 @@ export class SeoService {
     try {
       this.meta.updateTag(data);
     } catch (error) {
-      console.log(`[[updateMetaTags]] >> Um erro ocorreu durante a atualização da meta tag '${data.name}'. Descrição do erro: ${error}`);
+      console.log(`[[SeoService | updateMetaTags]] >> Um erro ocorreu durante a atualização da meta tag '${data.name}'. Descrição do erro: ${error}`);
     } 
   }
 
@@ -46,7 +46,7 @@ export class SeoService {
     try {
       this.meta.removeTag(`name = "${meta_tag}"`);
     } catch (error) {
-      console.log(`[[updateMetaTags]] >> Um erro ocorreu durante a remoção da meta tag '${meta_tag}'. Descrição do erro: ${error}`);
+      console.log(`[[SeoService | removeMetaTags]] >> Um erro ocorreu durante a remoção da meta tag '${meta_tag}'. Descrição do erro: ${error}`);
     } 
   } 
 }

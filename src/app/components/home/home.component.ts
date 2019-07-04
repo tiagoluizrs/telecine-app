@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
+import { HttpService } from '../../services/Http/http.service';
 
 @Component({
   selector: 'app-home',
@@ -7,13 +8,25 @@ import { SeoService } from '../../services/Seo/seo.service';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
+  movies: Array<any> = [];
+
   constructor(
-    private seoService: SeoService
+    private seoService: SeoService,
+    private httpService: HttpService
   ){
-    this.setMetaTag()
+    this.setMetaTag();
+    this.getMovies();
   } 
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  getMovies(){
+    this.httpService.get("movies").subscribe((data: any) => {
+      this.movies = data
+    },(error) => {
+        console.log(`[[HomeComponent | getMovies]] >> Um erro ocorreu durante o carregamento dos filmes. Descrição do erro: ${error}`);
+      }
+    );
   }
 
   setMetaTag(): void{
