@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
 
@@ -7,26 +7,47 @@ import { HttpService } from '../../services/Http/http.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.sass']
 })
+
 export class HomeComponent implements OnInit {
-  movies: Array<any> = [];
-  slideConfig: any = {}
+  movies: Array<any> ;
+  slideConfig: any;
+  window_size: number;
+  current_banner_image: string;
+  movie_sizes: any = {  banner: 'hero3x1' };
 
   constructor(
     private seoService: SeoService,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private elRef:ElementRef,
+    private renderer: Renderer2
   ){
   } 
 
   ngOnInit() {
+    this.configure_sizes();
     this.setMetaTag();
     this.getMovies();
+  }
+  
+  configure_sizes(): void{
+    this.window_size = window.innerWidth;
+
+    if(this.window_size > 768){
+      this.movie_sizes.banner = 'hero3x1';
+    }else if(this.window_size < 768 && this.window_size > 360){
+      this.movie_sizes.banner = 'hero3x1';
+    }else{
+      this.movie_sizes.banner = 'hero4x3';
+    }
   }
 
   getMovies(){
     this.httpService.get("movies").subscribe((data: any) => {
-      this.movies = data
+      this.movies = data;
+      this.current_banner_image = this.movies[0][this.movie_sizes.banner]
       this.initializeCarousel();
     },(error) => {
+      this.movies = null;
         console.log(`[[HomeComponent | getMovies]] >> Um erro ocorreu durante o carregamento dos filmes. Descrição do erro: ${error}`);
       }
     );
@@ -46,6 +67,10 @@ export class HomeComponent implements OnInit {
     ];
 
     this.seoService.setMetaTag(data, true);
+  }
+
+  afterChange(e) {
+    this.current_banner_image = this.movies[e.currentSlide][this.movie_sizes.banner]
   }
 
   initializeCarousel(): void{
@@ -69,7 +94,4 @@ export class HomeComponent implements OnInit {
       ]
     } 
   }
-
-  
-  
 }
