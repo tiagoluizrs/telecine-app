@@ -11,8 +11,7 @@
         <div class="carousel">
             <ngx-slick-carousel class="center carousel" 
                 #slickModal="slick-carousel" 
-                [config]="slideConfig" 
-                (breakpoint)="breakpoint($event)">
+                [config]="slideConfig">
                 <div ngxSlickItem *ngFor="let movie of movies" class="movie">
                     <img src="{{ movie.poster_p }}" alt="" width="100%">
                 </div>
