@@ -3,16 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { Step1Component } from './step1/step1.component';
-import { Step2Component } from './step2/step2.component';
-import { HomeComponent } from './home/home.component';
+
+// Componentes
+import { HomeComponent } from './components/home/home.component';
+import { Step1Component } from './components/step1/step1.component';
+import { Step2Component } from './components/step2/step2.component';
+
+import { SeoService } from './services/Seo/seo.service'
+
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
     Step1Component,
-    Step2Component,
-    HomeComponent
+    Step2Component
   ],
   imports: [
     BrowserModule,

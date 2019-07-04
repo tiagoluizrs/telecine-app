@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  project_name: "telecine-app"
 };

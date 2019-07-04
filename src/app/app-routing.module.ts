@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Componentes do projeto
-import { HomeComponent } from './home/home.component';
-import { Step1Component } from './step1/step1.component';
-import { Step2Component } from './step2/step2.component';
+import { HomeComponent } from './components/home/home.component';
+import { Step1Component } from './components/step1/step1.component';
+import { Step2Component } from './components/step2/step2.component';
 
 const routes: Routes = [
   {
