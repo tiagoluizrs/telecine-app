@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
+
 import { SeoService } from '../../services/Seo/seo.service';
 
 @Component({
@@ -7,14 +11,51 @@ import { SeoService } from '../../services/Seo/seo.service';
   styleUrls: ['./step1.component.sass']
 })
 export class Step1Component implements OnInit {
+  loginForm: FormGroup;
+  submitted = false;
+  returnUrl: string;
 
   constructor(
-    private seoService: SeoService
+    private seoService: SeoService,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
   ){
-    this.setMetaTag()
   }
 
   ngOnInit() {
+    this.setMetaTag()
+    this.initForm()
+  }
+
+  initForm(){
+    this.loginForm = this.formBuilder.group({
+        name: ['', Validators.required],
+        email: ['', Validators.required],
+        cpf: ['', Validators.required],
+        birthday: ['', Validators.required],
+        city: ['', Validators.required],
+        state: ['', Validators.required]
+    });
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+  }
+
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+
+    if (this.loginForm.invalid) {
+        return;
+    }
+
+    console.log(this.f)
+    // this.f.field.value
+  }
+
+  setActive(e): void{
+    console.log(e)
   }
 
   setMetaTag(): void{

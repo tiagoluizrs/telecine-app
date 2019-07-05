@@ -2,6 +2,8 @@ import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
 
+import { Step1Component } from '../step1/step1.component'
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

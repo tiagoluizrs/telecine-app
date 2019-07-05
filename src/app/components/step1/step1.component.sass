@@ -1,0 +1,99 @@
+.main
+    float: left
+    width: 100%
+    .content__form
+        float: none
+        margin: 0 auto
+        display: table
+        padding:
+            left: 20px
+            right: 20px
+            bottom: 30px
+        max:
+            width: 400px
+        .col
+            h4
+                margin:
+                    top: 30px
+                    bottom: 15px
+                font-size: 1.1em
+
+            form
+                .form__group
+                    width: 100%
+                    position: relative
+                    float: left
+                    margin:
+                        top: 25px
+                        bottom: 5px
+                    label
+                        text:
+                            transform: uppercase
+                        font:
+                            size: 0.8em
+                        position: absolute
+                        top: 50%
+                        left: 5px
+                        z-index: 1
+                        color: #666
+                        margin:
+                            top: -9px
+                    input
+                        text:
+                            indent: 6px
+                    select
+                        text:
+                            indent: 2px
+                    input, select
+                        height: 30px
+                        background:
+                            color: transparent
+                        z-index: 2
+                        width: 100%
+                        position: relative
+                        outline: none
+                        border:
+                            top: none
+                            left: none
+                            right: none
+                            bottom: 1px solid #666
+                        &:focus
+                            color: #e53e34
+                            border:
+                                bottom: 
+                                    color: #e53e34  
+                            &+label
+                                color: #e53e34
+                                top: -5px
+                                font:
+                                    size: 0.7em
+                        &:valid
+                            color: #e53e34
+                            border:
+                                bottom: 
+                                    color: #e53e34  
+                            & +label
+                                color: #e53e34
+                                top: -5px
+                                font:
+                                    size: 0.7em
+                    button
+                        min-width: 190px
+                        max-width: 260px
+                        width: 100%
+                        svg
+                            fill: #fff
+                            height: 23px
+                            width: auto
+                            float: right
+                            margin-top: 3px
+
+// ======================================= Responsividade =======================================
+@media screen and (min-width: 769px)
+    .main
+        .content__form
+            .col
+                form
+                    .form__group
+                        button
+                            max-width: 300px
