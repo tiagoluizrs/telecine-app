@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
 import { SeoService } from '../../services/Seo/seo.service';
+import { HttpService } from '../../services/Http/http.service';
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-step1',
@@ -14,18 +15,25 @@ export class Step1Component implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   returnUrl: string;
+  sendgrid_api_key: string = environment.sendgrid_api_key;
+  states: any;
+  cities: any;
+  cities_state: any;
+  select_disable: boolean = true;
 
   constructor(
     private seoService: SeoService,
+    private httpService: HttpService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-  ){
-  }
+  ){}
 
   ngOnInit() {
-    this.setMetaTag()
-    this.initForm()
+    this.setMetaTag();
+    this.initForm();
+    this.getStates();
+    this.getCities();
   }
 
   initForm(){
@@ -41,7 +49,46 @@ export class Step1Component implements OnInit {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
+  getStates(){
+    let headers = {
+      'Content-Type': 'application/json'
+    }
+
+    this.httpService.get("https://demo3127152.mockable.io/states", headers).subscribe((data: any) => {
+      this.states = data;
+    },(error) => {
+        this.states = null;
+        console.log(`[[Step1Component | getCities ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
+      }
+    );
+  }
+
+  getCities(){
+    let headers = {
+      'Content-Type': 'application/json'
+    }
+
+    this.httpService.get("https://demo3127152.mockable.io/cities", headers).subscribe((data: any) => {
+      this.cities = data;
+    },(error) => {
+        this.cities = null;
+        console.log(`[[Step1Component | getCities ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
+      }
+    );
+  }
+
   get f() { return this.loginForm.controls; }
+
+  changeState(e){
+    // TODO - Criar o reset do select ao trocar de estado 
+    if(e == null  || e == undefined || e == ''){
+      this.select_disable = true;
+    }else{
+      let id = e.split(',')[0]
+      this.cities_state = this.cities[id];
+      this.select_disable = false;
+    }
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -50,12 +97,20 @@ export class Step1Component implements OnInit {
         return;
     }
 
-    console.log(this.f)
-    // this.f.field.value
-  }
+    let state = this.f.state.value.split(',')[1]
 
-  setActive(e): void{
-    console.log(e)
+    console.log({
+      'name': this.f.name.value,
+      'email': this.f.email.value,
+      'cpf': this.f.cpf.value,
+      'birthday': this.f.birthday.value,
+      'state': state,
+      'city': this.f.city.value
+    })
+
+    console.log(this.f.state)
+
+    this.router.navigateByUrl('/step2');
   }
 
   setMetaTag(): void{

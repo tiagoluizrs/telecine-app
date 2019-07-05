@@ -32,9 +32,9 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <select ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
-                            <option value=""></option>
-                            <option value="Teste">Teste</option>
+                        <select (ngModelChange)="changeState($event)" ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                            <option disabled></option>
+                            <option *ngFor="let state of states" value="{{state.id}},{{state.initials}}">{{state.name}}</option>
                         </select>
                         <label for="state">Estado</label>
                         <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
@@ -42,9 +42,9 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <select ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
-                            <option value=""></option>
-                            <option value="Teste">Teste</option>
+                        <select [attr.disabled]="select_disable ? '' : null" ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                            <option disabled></option>
+                            <option *ngFor="let city of cities_state" value="{{city}}">{{city}}</option>
                         </select>
                         <label for="city">Cidade</label>
                         <div *ngIf="submitted && f.city.errors" class="invalid-feedback">

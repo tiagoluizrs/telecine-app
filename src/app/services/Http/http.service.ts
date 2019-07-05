@@ -6,24 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpService {
-  url: string = 'https://demo3127152.mockable.io';
-  headers = new HttpHeaders();
-
   constructor(
     private http: HttpClient
-  ) { 
-    this.headers.set('Content-Type', 'application/json');
-  }
+  ) {}
 
-  setHeaders(key, val){
-    this.headers.set(key, val);
-  }
+  get(url: string, headers: any): Observable<any> {
+    let header_object = new HttpHeaders(headers);
 
-  get(end_point: string): Observable<any> {
     try{
-      return this.http.get(`${this.url}/${end_point}`);
+      return this.http.get(`${url}`, {headers: header_object});
     } catch(error){
-      console.log(`[[HttpService | getData]] >> Um erro ocorreu durante o carregamento dos filmes. Descrição do erro: ${error}`);
+      console.log(`[[HttpService | get]] >> Um erro ocorreu durante este get. Descrição do erro: ${error}`);
       return null
     }
   }

@@ -57,7 +57,11 @@ export class HomeComponent implements OnInit {
   }
 
   getMovies(){
-    this.httpService.get("movies").subscribe((data: any) => {
+    let headers = {
+      'Content-Type': 'application/json'
+    }
+
+    this.httpService.get("https://demo3127152.mockable.io/movies", headers).subscribe((data: any) => {
       this.movies = data;
       this.current_banner = {
         'image': this.movies[0][this.movie_sizes.banner],
