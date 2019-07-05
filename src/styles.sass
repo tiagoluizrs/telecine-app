@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 // Fontes
-@import 'https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap'
+@import 'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap'
 
 // Estilos de estrutura
 *
@@ -9,15 +9,36 @@
     transition: all ease-out 0.3s
 
 .content
+    width: 100%
+    float: left
+    box:
+        sizing: border-box
     padding: 
-        left: 15px
-        right: 15px
+        left: 20px
+        right: 20px
 
 .content__fluid
+    width: 100%
+    float: left
+    box:
+        sizing: border-box
     padding: 
         left: 0
         right: 0
 
+.col
+    float: left
+    padding: 0 15px
+    box-sizing: border-box
+    &.md__12
+        width: 100%
+
+@media screen and (min-width: 769px)
+    .col
+        &.lg__6
+            width: 50%
+        &.lg__12
+            width: 100%
 
 // Estilos de botões
 .button
@@ -70,7 +91,7 @@
                 &::before
                     width: 45px !important
                     background:
-                        color: #6e6f75 !important
+                        color: #fff !important
         width: 35px !important
         height: 10px !important
         button
@@ -78,7 +99,7 @@
             height: 10px !important
             &::before
                 background:
-                    color: #242429 !important
+                    color: #6e6f75 !important
                 border:
                     radius: 30px !important
                 width: 35px !important

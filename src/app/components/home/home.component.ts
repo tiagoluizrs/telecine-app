@@ -12,7 +12,20 @@ export class HomeComponent implements OnInit {
   movies: Array<any> ;
   slideConfig: any;
   window_size: number;
-  current_banner_image: string;
+  current_banner: any = {
+    'image': null,
+    'title': null,
+  };
+  highlights: any = [
+    {
+      'wallpaper': null,
+      'title': null
+    },
+    {
+      'wallpaper': null,
+      'title': null
+    },
+  ];
   movie_sizes: any = {  banner: 'hero3x1' };
 
   constructor(
@@ -44,7 +57,20 @@ export class HomeComponent implements OnInit {
   getMovies(){
     this.httpService.get("movies").subscribe((data: any) => {
       this.movies = data;
-      this.current_banner_image = this.movies[0][this.movie_sizes.banner]
+      this.current_banner = {
+        'image': this.movies[0][this.movie_sizes.banner],
+        'title': this.movies[0]['titulo_portugues'],
+      };
+      this.highlights = [
+        {
+          'wallpaper': this.movies[0]['wallpaper'],
+          'title': this.movies[0]['titulo_portugues'],
+        },
+        {
+          'wallpaper': this.movies[1]['wallpaper'],
+          'title': this.movies[1]['titulo_portugues'],
+        },
+      ];
       this.initializeCarousel();
     },(error) => {
       this.movies = null;
@@ -70,7 +96,10 @@ export class HomeComponent implements OnInit {
   }
 
   afterChange(e) {
-    this.current_banner_image = this.movies[e.currentSlide][this.movie_sizes.banner]
+    this.current_banner = {
+      'image': this.movies[e.currentSlide][this.movie_sizes.banner],
+      'title': this.movies[e.currentSlide]['titulo_portugues']
+    };
   }
 
   initializeCarousel(): void{

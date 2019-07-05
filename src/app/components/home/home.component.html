@@ -1,9 +1,9 @@
 <span class="shadow"></span>
 <main class="main">
     <!-- [style.backgroundImage]='"url(" + current_banner_image + ")"' -->
-    <div class="content content__darkgray">
+    <div class="content content__banner">
         <div class="background__image">
-            <img src="{{current_banner_image}}" alt="">
+            <img src="{{current_banner.image}}" alt="{{current_banner.title}}">
         </div>
         <div class="banner">
             <h1>Filmes exclusivos dos maiores estúdios, é <span class="gray">só dar um play</span></h1>
@@ -13,24 +13,40 @@
             </button>
         </div>
     </div>
-    <div class="content__fluid">
+    <div class="content__fluid content__darkgray">
         <div class="carousel">
             <ngx-slick-carousel class="center carousel" 
                 #slickModal="slick-carousel" 
                 [config]="slideConfig"
                 (afterChange)="afterChange($event)">
                 <div ngxSlickItem *ngFor="let movie of movies" class="movie">
-                    <img src="{{ movie.poster_p }}" alt="" width="100%">
+                    <img src="{{ movie.poster_p }}" alt="{{ movie.titulo_portugues }}" width="100%">
                 </div>
             </ngx-slick-carousel>
         </div>
-        <div class="devices">
-            <h3>Dispositivos</h3>
-            <h4>O melhor catálogo em todas as telas.</h4>
-            <div class="col col-12 col-6">
-
+        <div class="content devices">
+            <div class="col md__12 lg__12">
+                <h3>Dispositivos</h3>
+                <h4>O melhor catálogo. Em todas as telas.</h4>
             </div>
-            <div class="col col-12 col-6"></div>
+            <div class="col md__12 lg__6 box__col">
+                <img src="{{highlights[0].wallpaper}}" alt="{{highlights[0].title}}">
+                <h5>Assista na TV</h5>
+                <ul>
+                    <li><span>Smart TVs</span></li>
+                    <li><span>Chromecast</span></li>
+                    <li><a href="https://www.microsoft.com/pt-br/p/telecine-play-filmes-online/9n972klt225p" target="_blank" alt="Aplicativo Xbox One">Xbox One</a></li>
+                </ul>
+            </div>
+            <div class="col md__12 lg__6 box__col">
+                <img src="{{highlights[1].wallpaper}}" alt="{{highlights[1].title}}">
+                <h5>Ou onde quiser</h5>
+                <ul>
+                    <li><a href="https://play.google.com/store/apps/details?id=br.com.telecineplay.android&hl=pt_BR" target="_blank" alt="Aplicativo Android">Android</a></li>
+                    <li><a href="https://apps.apple.com/br/app/telecine-play-app-de-filmes/id1266305338" target="_blank" alt="Aplicativo IOS">IOS</a></li>
+                    <li><a href="https://www.telecineplay.com.br/" target="_blank" alt="Telecine play no navegador">PC</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </main>
