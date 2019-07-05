@@ -27,15 +27,29 @@
         right: 0
 
 .content__center
-    text:
-        align: center
-        
+    float: none
+    margin: 0 auto
+    display: table
+    padding:
+        left: 20px
+        right: 20px
+    max:
+        width: 400px
+    .vertical__align
+        display: table-cell
+        vertical-align: middle
+        float: none
+
 .col
     float: left
     padding: 0 15px
     box-sizing: border-box
     &.md__12
         width: 100%
+
+// Cores de texto
+.red
+    color: #e53e34
 
 // Modal
 .modal__content
@@ -127,9 +141,61 @@
                 content: "" !important
                 opacity: 1 !important
 
+// Spinner
+.linear-spinner
+    overflow: hidden
+    width: 100%
+    height: 5px
+    background-color: #b9b4ff
+    margin: 0
+    .determinate
+        position: relative
+        max-width: 100%
+        height: 100%
+        -webkit-transition: width 400ms ease-out 1s
+        -moz-transition: width 400ms ease-out 1s
+        -o-transition: width 400ms ease-out 1s
+        transition: width 400ms ease-out 1s
+        background-color: #03A9F4
+    .indeterminate
+        position: relative
+        width: 100%
+        height: 100%
+        &:before
+            content: ''
+            position: absolute
+            height: 100%
+            background-color: #67657d
+            animation: indeterminate_first 1.2s infinite ease-out
+        &:after
+            content: ''
+            position: absolute
+            height: 100%
+            background-color: #0f0b48
+            animation: indeterminate_second 1.2s infinite ease-in
+
+@keyframes indeterminate_first 
+    0%
+        left: -100%
+        width: 100%
+
+    100%
+        left: 100%
+        width: 10%
+
+
+@keyframes indeterminate_second
+    0%
+        left: -150%
+        width: 100%
+
+    100%
+        left: 100%
+        width: 10%
+
 // ======================================= Responsividade =======================================
 // Estilos de estrutura
-@media screen and (min-width: 769px)
+@media screen and (min-width: 48.0625em)
     .col
         &.lg__6
             width: 50%

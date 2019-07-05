@@ -1,22 +1,19 @@
 .main
     float: left
     width: 100%
-    .content__form
-        float: none
-        margin: 0 auto
-        display: table
-        padding:
-            left: 20px
-            right: 20px
-            bottom: 30px
-        max:
-            width: 400px
+    .content__center
+        height: calc(100vh - 201px)
         .col
-            h4
+            p
                 margin:
                     top: 30px
                     bottom: 15px
-                font-size: 1.1em
+                font:
+                    size: 1.1em
+                line:
+                    height: 1.1em
+                font:
+                    weight: 300
 
             form
                 .form__group
@@ -87,13 +84,23 @@
                             width: auto
                             float: right
                             margin-top: 3px
+                    &:last-child
+                        text:
+                            align: center
+
 
 // ======================================= Responsividade =======================================
-@media screen and (min-width: 769px)
+@media screen and (min-width: 48.0625em)
     .main
-        .content__form
+        .content__center
+            height: calc(100vh - 201px)
             .col
+                p
+                    margin:
+                        top: 0px
                 form
                     .form__group
+                        margin:
+                            bottom: 0
                         button
                             max-width: 300px

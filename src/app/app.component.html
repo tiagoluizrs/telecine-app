@@ -1,14 +1,17 @@
+<div *ngIf="loading" class="linear-spinner">
+    <div class="indeterminate"></div>
+</div>
+
 <header>
     <div class="header__content content">
-        <a class="header__logo" href="/"></a>
+        <a class="header__logo" routerLink="/"></a>
     </div>
 </header>
-
 <router-outlet></router-outlet>
 
 <footer>
     <div class="footer__content content">
-        <a class="footer__logo" href="/"></a>
+        <a class="footer__logo" routerLink="/"></a>
         <div class="footer__help">
             <h4 class="footer__help__title">Ficou com alguma dúvida?</h4>
             <a href="https://ajuda.telecineplay.com.br/" target="_blank" alt="Acesse nossa ajuda clicando aqui." class="footer__help__link">Acesse nossa ajuda</a>
