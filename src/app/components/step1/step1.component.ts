@@ -20,6 +20,8 @@ export class Step1Component implements OnInit {
   cities: any;
   cities_state: any;
   select_disable: boolean = true;
+  cpf_length: boolean = true;
+  birthday_length: boolean = true;
 
   constructor(
     private seoService: SeoService,
@@ -27,10 +29,11 @@ export class Step1Component implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-  ){}
+  ){
+    this.setMetaTag();
+  }
 
   ngOnInit() {
-    this.setMetaTag();
     this.initForm();
     this.getStates();
     this.getCities();
@@ -80,7 +83,7 @@ export class Step1Component implements OnInit {
   get f() { return this.loginForm.controls; }
 
   changeState(e){
-    // TODO - Criar o reset do select ao trocar de estado 
+    // TODO - Criar o reset do select ao trocar de estado
     if(e == null  || e == undefined || e == ''){
       this.select_disable = true;
     }else{
@@ -90,31 +93,63 @@ export class Step1Component implements OnInit {
     }
   }
 
+  verify_field_size(size, field):void{
+    if(field == 'cpf'){
+      field = this.f.cpf.value;
+
+      if((field.length < size && field.length > 0) && this.cpf_length == false){
+        this.cpf_length = false
+      }else{
+        this.cpf_length = true
+      }
+    }else if(field == 'birthday'){
+      field = this.f.birthday.value;
+
+      if((field.length < size && field.length > 0) && this.birthday_length == false){
+        this.birthday_length = false
+      }else{
+        this.birthday_length = true
+      }
+    }
+
+    
+  }
+
   onSubmit() {
+    let state = this.f.state.value.split(',')[1];
+    let cpf = this.f.cpf.value;
+    let birthday = this.f.birthday.value;
+    
+    // TODO - Criar validação para quando não for adicionado um email, quando o cpf não for preenchido por completo e para a data de nascimento
     this.submitted = true;
+
+    if(cpf.length < 11 && cpf.length > 0){
+      this.cpf_length = false
+    }
+
+    if(birthday.length < 8 && birthday.length > 0){
+      this.birthday_length = false
+    }
 
     if (this.loginForm.invalid) {
         return;
     }
 
-    let state = this.f.state.value.split(',')[1]
-
     console.log({
       'name': this.f.name.value,
       'email': this.f.email.value,
-      'cpf': this.f.cpf.value,
-      'birthday': this.f.birthday.value,
+      'cpf': cpf,
+      'birthday': birthday,
       'state': state,
       'city': this.f.city.value
     })
 
     console.log(this.f.state)
-
-    this.router.navigateByUrl('/step2');
+    this.router.navigate(['/step2'], { queryParams:  { step2_enabled: true }, skipLocationChange: true});
   }
 
   setMetaTag(): void{
-    let data = [
+    let metatags = [
       {name: 'description', content: 'Experimente por 7 dias e assine o Telecine Play. São mais de 1900 filmes para você assistir online. Uma nova experiência de filmes chegou.'},   
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},   
       {name: 'robots', content: 'INDEX, FOLLOW'},
@@ -124,8 +159,10 @@ export class Step1Component implements OnInit {
       {property: 'og:title', content: "7 dias grátis Telecine Play"},
       {property: 'og:type', content: "website"},
       {charset: 'UTF-8'}
-    ];
+    ];  
 
-    this.seoService.setMetaTag(data, true);
+    for(let metatag of metatags){
+      this.seoService.updateMetaTags(metatag)
+    }
   }
 }

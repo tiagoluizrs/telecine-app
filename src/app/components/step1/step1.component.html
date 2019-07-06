@@ -1,5 +1,5 @@
 <main class="main">
-    <div class="content content__center">
+    <div class="content content__center content__fullvh">
             <div class="col lg__12 md__12 vertical__align">
                 <p>Para começar a usar seus 7 dias grátis precisamos de alguns dados.</p>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -18,17 +18,23 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <input mask="000.000.000-00" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="cpf" [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }" />
+                        <input (keyup)="verify_field_size(11, 'cpf')" mask="000.000.000-00" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="cpf" [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }" />
                         <label for="cpf">CPF</label>
                         <div *ngIf="submitted && f.cpf.errors" class="invalid-feedback">
                             <div *ngIf="f.cpf.errors.required">Campo obrigatório</div>
                         </div>
+                        <div *ngIf="!cpf_length" class="invalid-feedback">
+                            <div>Preencha os 11 números do cpf</div>
+                        </div>
                     </div>
                     <div class="form__group">
-                        <input mask="00/00/0000" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="birthday" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
+                        <input (keyup)="verify_field_size(8, 'birthday')" mask="00/00/0000" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="birthday" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
                         <label for="birthday">Data de Nascimento</label>
                         <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
                             <div *ngIf="f.birthday.errors.required">Campo obrigatório</div>
+                        </div>
+                        <div *ngIf="!birthday_length" class="invalid-feedback">
+                            <div>Preencha a data corretamente</div>
                         </div>
                     </div>
                     <div class="form__group">

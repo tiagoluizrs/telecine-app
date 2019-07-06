@@ -36,11 +36,11 @@ export class HomeComponent implements OnInit {
     private elRef:ElementRef,
     private renderer: Renderer2
   ){
+    this.setMetaTag();
   } 
 
   ngOnInit() {
     this.configure_sizes();
-    this.setMetaTag();
     this.getMovies();
   }
   
@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
   }
 
   setMetaTag(): void{
-    let data = [
+    let metatags = [
       {name: 'description', content: 'No Telecine Play você encontra, com exclusividade, filmes premiados dos maiores estúdios de Hollywood e o melhor do cinema nacional, disponíveis para os assinantes dos 6 canais da Rede Telecine. São mais de 1.500 filmes para assistir a qualquer hora no computador, smartphone, tablet, Smart TV e Xbox One.'},   
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},   
       {name: 'robots', content: 'INDEX, FOLLOW'},
@@ -98,7 +98,9 @@ export class HomeComponent implements OnInit {
       {charset: 'UTF-8'}
     ];
 
-    this.seoService.setMetaTag(data, true);
+    for(let metatag of metatags){
+      this.seoService.updateMetaTags(metatag)
+    }
   }
 
   afterChange(e) {

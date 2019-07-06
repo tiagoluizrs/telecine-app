@@ -1,8 +1,7 @@
+@import '../../../variables.sass'
+
 .main
-    float: left
-    width: 100%
     .content__center
-        height: calc(100vh - 201px)
         .col
             p
                 margin:
@@ -35,7 +34,7 @@
                         top: 50%
                         left: 5px
                         z-index: 1
-                        color: #666
+                        color: $gray
                         margin:
                             top: -9px
                     input
@@ -56,24 +55,24 @@
                             top: none
                             left: none
                             right: none
-                            bottom: 1px solid #666
+                            bottom: 1px solid $gray
                         &:focus
-                            color: #e53e34
+                            color: $main_color
                             border:
                                 bottom: 
-                                    color: #e53e34  
+                                    color: $main_color  
                             &+label
-                                color: #e53e34
+                                color: $main_color
                                 top: -5px
                                 font:
                                     size: 0.7em
                         &:valid
-                            color: #e53e34
+                            color: $main_color
                             border:
                                 bottom: 
-                                    color: #e53e34  
+                                    color: $main_color  
                             & +label
-                                color: #e53e34
+                                color: $main_color
                                 top: -5px
                                 font:
                                     size: 0.7em
@@ -82,7 +81,7 @@
                         max-width: 260px
                         width: 100%
                         svg
-                            fill: #fff
+                            fill: $white
                             height: 23px
                             width: auto
                             float: right
@@ -98,7 +97,6 @@
 @media screen and (min-width: 48.0625em)
     .main
         .content__center
-            height: calc(100vh - 201px)
             .col
                 p
                     margin:

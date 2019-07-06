@@ -21,7 +21,7 @@
       "app",
       "kebab-case"
     ],
-    "import-blacklist": [
+    "import-$blacklist": [
       true,
       "rxjs/Rx"
     ],
