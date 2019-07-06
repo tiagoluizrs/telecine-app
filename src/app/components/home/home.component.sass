@@ -173,7 +173,7 @@
                                 repeat: no-repeat
 
 // ======================================= Responsividade =======================================
-@media screen and (min-width: 62.0625em)
+@media screen and (min-width: $w_993px)
     .main
         .content__banner
             .background__image
@@ -181,7 +181,7 @@
                     height: auto
                     width: 100%
 
-@media screen and (min-width: 48.0625em)
+@media screen and (min-width: $w_769px)
     .main
         .content__darkgray
             .devices
@@ -189,6 +189,9 @@
                     &:before
                         width: calc(100% - 170px)
                         right: 0
+
+@media screen and (min-width: $w_361px)
+    .main
         .content__banner
             .banner
                 a

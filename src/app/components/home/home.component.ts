@@ -1,8 +1,7 @@
 import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
-
-import { Step1Component } from '../step1/step1.component'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +10,7 @@ import { Step1Component } from '../step1/step1.component'
 })
 
 export class HomeComponent implements OnInit {
-  movies: Array<any> ;
+  movies: Observable<Array<any>>
   slideConfig: any;
   window_size: number;
   current_banner: any = {
@@ -63,20 +62,22 @@ export class HomeComponent implements OnInit {
 
     this.httpService.get("https://demo3127152.mockable.io/movies", headers).subscribe((data: any) => {
       this.movies = data;
-      this.current_banner = {
-        'image': this.movies[0][this.movie_sizes.banner],
-        'title': this.movies[0]['titulo_portugues'],
-      };
-      this.highlights = [
-        {
-          'wallpaper': this.movies[0]['wallpaper'],
+      if(data.length > 0){
+        this.current_banner = {
+          'image': this.movies[0][this.movie_sizes.banner],
           'title': this.movies[0]['titulo_portugues'],
-        },
-        {
-          'wallpaper': this.movies[1]['wallpaper'],
-          'title': this.movies[1]['titulo_portugues'],
-        },
-      ];
+        };
+        this.highlights = [
+          {
+            'wallpaper': this.movies[0]['wallpaper'],
+            'title': this.movies[0]['titulo_portugues'],
+          },
+          {
+            'wallpaper': this.movies[1]['wallpaper'],
+            'title': this.movies[1]['titulo_portugues'],
+          },
+        ];
+      }
       this.initializeCarousel();
     },(error) => {
       this.movies = null;

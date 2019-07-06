@@ -3,7 +3,7 @@
     <!-- [style.backgroundImage]='"url(" + current_banner_image + ")"' -->
     <div class="content content__banner">
         <div class="background__image">
-            <img src="{{current_banner.image}}" alt="{{current_banner.title}}">
+            <img src="{{current_banner.image}}" alt="{{current_banner.title}}" rel="preload">
         </div>
         <div class="banner" id="banner_try">
             <h1>Filmes exclusivos dos maiores estúdios, é <span class="red">só dar um play</span></h1>
@@ -20,7 +20,7 @@
                 [config]="slideConfig"
                 (afterChange)="afterChange($event)">
                 <div ngxSlickItem *ngFor="let movie of movies" class="movie">
-                    <img src="{{ movie.poster_p }}" alt="{{ movie.titulo_portugues }}" width="100%">
+                    <img src="{{ movie.poster_p }}" alt="{{ movie.titulo_portugues }}" width="100%" rel="preload">
                 </div>
             </ngx-slick-carousel>
         </div>
