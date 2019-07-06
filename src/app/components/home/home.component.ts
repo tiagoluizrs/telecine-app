@@ -10,7 +10,10 @@ import { Observable } from 'rxjs';
 })
 
 export class HomeComponent implements OnInit {
-  movies: Observable<Array<any>>
+  defaultBanner: string = '/assets/img/defaultBanner.png';
+  defaultCarousel: string = '/assets/img/defaultCarousel.png';
+  defaultBox: string = '/assets/img/defaultBox.png';
+  movies: Observable<Array<any>>;
   slideConfig: any;
   window_size: number;
   current_banner: any = {
@@ -42,7 +45,7 @@ export class HomeComponent implements OnInit {
     this.configure_sizes();
     this.getMovies();
   }
-  
+
   configure_sizes(): void{
     this.window_size = window.innerWidth;
 
@@ -55,7 +58,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getMovies(){
+  getMovies(): void{
     let headers = {
       'Content-Type': 'application/json'
     }
@@ -104,7 +107,18 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  afterChange(e) {
+  slickInit(e): void{
+    try{
+      e.slickGoTo(0)
+    }catch(error){
+      setTimeout(function(){
+        e.slickGoTo(0)
+      }, 1000)
+      console.log(`[[HomeComponent | slickInit]] >> Um erro ocorreu no momento em que o item 0 do carousel foi ativado. Descrição do erro: ${error}`);
+    }
+  }
+
+  afterChange(e): void{
     this.current_banner = {
       'image': this.movies[e.currentSlide][this.movie_sizes.banner],
       'title': this.movies[e.currentSlide]['titulo_portugues']

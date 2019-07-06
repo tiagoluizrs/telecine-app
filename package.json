@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-postbuild": "ng build --prod --aot"
+    "heroku-postbuild": "ng build --prod --aot --build-optimizer"
   },
   "private": true,
   "dependencies": {
@@ -20,8 +20,10 @@
     "@angular/platform-browser": "~8.1.0",
     "@angular/platform-browser-dynamic": "~8.1.0",
     "@angular/router": "~8.1.0",
+    "compression": "^1.7.4",
     "express": "^4.17.1",
     "jquery": "^3.4.1",
+    "ng-lazyload-image": "^6.0.0",
     "ngx-mask": "^8.0.1",
     "ngx-slick-carousel": "^0.4.4",
     "normalize.css": "^8.0.1",

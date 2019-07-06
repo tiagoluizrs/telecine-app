@@ -13,11 +13,13 @@ import {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass']
 })
-export class AppComponent {
+export class AppComponent{
   title = 'Assine Telecine'; 
   loading = false;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router
+    ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
