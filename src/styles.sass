@@ -4,7 +4,8 @@
 
 // Estrutura
 *
-    font-family: 'Roboto', sans-serif
+    font:
+        family: 'Roboto', sans-serif
     transition: all ease-out 0.3s
 
 .main
@@ -46,22 +47,14 @@
 .col
     float: left
     padding: 0 15px
-    box-sizing: border-box
+    box:
+        sizing: border-box
     &.md__12
         width: 100%
 
 // Cores de texto
 .red
     color: $main_color
-
-// Modal
-.modal__content
-    position: fixed
-    width: 100%
-    height: 100%
-    background:
-        color: $white
-    z-index: 9999
 
 // Botões
 .button
@@ -108,7 +101,8 @@
         right: 5% !important
 
 .slick-dotted.slick-slider
-    margin-bottom: 0px !important
+    margin:
+        bottom: 0px !important
 
 .slick-center
     -webkit-transform: scale(1.10)
@@ -149,17 +143,22 @@
     overflow: hidden
     width: 100%
     height: 5px
-    background-color: #b9b4ff
+    background:
+        color: #b9b4ff
     margin: 0
     .determinate
         position: relative
         max-width: 100%
         height: 100%
-        -webkit-transition: width 400ms ease-out 1s
-        -moz-transition: width 400ms ease-out 1s
-        -o-transition: width 400ms ease-out 1s
         transition: width 400ms ease-out 1s
-        background-color: #03A9F4
+        -webkit:
+            transition: width 400ms ease-out 1s
+        -moz:
+            transition: width 400ms ease-out 1s
+        -o:
+            transition: width 400ms ease-out 1s
+        background:
+            color: #03A9F4
     .indeterminate
         position: relative
         width: 100%
@@ -168,13 +167,15 @@
             content: ''
             position: absolute
             height: 100%
-            background-color: #67657d
+            background:
+                color: #67657d
             animation: indeterminate_first 1.2s infinite ease-out
         &:after
             content: ''
             position: absolute
             height: 100%
-            background-color: #0f0b48
+            background:
+                color: #0f0b48
             animation: indeterminate_second 1.2s infinite ease-in
 
 @keyframes indeterminate_first 
