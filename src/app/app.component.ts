@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import {
   Event,
   NavigationCancel,
@@ -11,26 +11,28 @@ import {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent{
   title = 'Assine Telecine'; 
-  loading = false;
+  hide_loading = false;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
     ) {
     this.router.events.subscribe((event: Event) => {
       switch (true) {
         case event instanceof NavigationStart: {
-          this.loading = false;
+          this.hide_loading = false;
           break;
         }
 
         case event instanceof NavigationEnd:
         case event instanceof NavigationCancel:
         case event instanceof NavigationError: {
-          this.loading = true;
+          this.hide_loading = true;
           break;
         }
         default: {
@@ -38,5 +40,15 @@ export class AppComponent{
         }
       }
     });
+  }
+
+  ngOnInit() {
+    setInterval(() => {
+      this.cdr.detectChanges();
+    }, 2000);
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detach();
   }
 }

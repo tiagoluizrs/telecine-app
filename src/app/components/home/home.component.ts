@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
 import { Observable } from 'rxjs';
@@ -6,11 +6,10 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./home.component.sass']
 })
 
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   defaultBanner: string = '/assets/img/defaultBanner.png';
   defaultBox: string = '/assets/img/defaultBox.png';
   movies: Observable<Array<any>>;
@@ -34,23 +33,16 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(
     private seoService: SeoService,
-    private httpService: HttpService,
-    private cdr: ChangeDetectorRef
+    private httpService: HttpService
   ){
     this.setMetaTag();
     this.configure_sizes();
   } 
 
   ngOnInit() {
-    setInterval(() => {
-      this.cdr.detectChanges();
-    }, 2000);
     this.getMovies();
   }
 
-  ngAfterViewInit() {
-    this.cdr.detach();
-  }
 
   configure_sizes(): void{
     this.window_size = window.innerWidth;

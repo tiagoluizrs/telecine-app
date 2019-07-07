@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { SeoService } from '../../services/Seo/seo.service';
 
 @Component({
@@ -27,8 +26,6 @@ export class Step2Component implements OnInit {
         this.router.navigateByUrl('/')
       }
     });
-
-    // this.step2_enabled = this.route.queryParamMap.pipe(map(params => params.get('step2_enabled') || 'None'));
   }
 
   setMetaTag(): void{

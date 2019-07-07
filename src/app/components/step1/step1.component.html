@@ -4,21 +4,21 @@
                 <p>Para começar a usar seus 7 dias grátis precisamos de alguns dados.</p>
                 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                     <div class="form__group">
-                        <input ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                        <input id="name" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
                         <label for="name">Nome</label>
                         <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                             <div *ngIf="f.name.errors.required">Campo obrigatório</div>
                         </div>
                     </div>
                     <div class="form__group">
-                        <input ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                        <input id="email" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                         <label for="email">E-mail</label>
                         <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                             <div *ngIf="f.email.errors.required">Campo obrigatório</div>
                         </div>
                     </div>
                     <div class="form__group">
-                        <input (keyup)="verify_field_size(11, 'cpf')" mask="000.000.000-00" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="cpf" [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }" />
+                        <input id="cpf" (keyup)="verify_field_size(11, 'cpf')" mask="000.000.000-00" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="cpf" [ngClass]="{ 'is-invalid': submitted && f.cpf.errors }" />
                         <label for="cpf">CPF</label>
                         <div *ngIf="submitted && f.cpf.errors" class="invalid-feedback">
                             <div *ngIf="f.cpf.errors.required">Campo obrigatório</div>
@@ -28,7 +28,7 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <input (keyup)="verify_field_size(8, 'birthday')" mask="00/00/0000" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="birthday" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
+                        <input id="birthday" (keyup)="verify_field_size(8, 'birthday')" mask="00/00/0000" ng-pattern="[A-Za-z0-9]{1,20}" required type="text" formControlName="birthday" [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }" />
                         <label for="birthday">Data de Nascimento</label>
                         <div *ngIf="submitted && f.birthday.errors" class="invalid-feedback">
                             <div *ngIf="f.birthday.errors.required">Campo obrigatório</div>
@@ -38,7 +38,10 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <select (ngModelChange)="changeState($event)" ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
+                        <div [ngClass]="{'hide': hide_preload_state==true, 'show': hide_preload_state==false}" class="preloader_select show">
+                            <img src="../../../assets/img/preloader.gif" alt="Carregando cidades">
+                        </div>
+                        <select id="state" disabled [attr.disabled]="select_state_disable ? '' : null" (ngModelChange)="changeState($event)" ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="state" [ngClass]="{ 'is-invalid': submitted && f.state.errors }">
                             <option disabled></option>
                             <option *ngFor="let state of states" value="{{state.id}},{{state.initials}}">{{state.name}}</option>
                         </select>
@@ -48,7 +51,11 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <select [attr.disabled]="select_disable ? '' : null" ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
+                        <div [ngClass]="{'hide': hide_preload_city==true, 'show': hide_preload_city==false}" class="preloader_select hide">
+                            <img src="../../../assets/img/preloader.gif" alt="Carregando cidades">
+                        </div>
+                                
+                        <select id="city" disabled [attr.disabled]="select_city_disable ? '' : null" ng-pattern="[A-Za-z0-9]{1,20}" required formControlName="city" [ngClass]="{ 'is-invalid': submitted && f.city.errors }">
                             <option disabled></option>
                             <option *ngFor="let city of cities_state" value="{{city}}">{{city}}</option>
                         </select>
@@ -58,7 +65,7 @@
                         </div>
                     </div>
                     <div class="form__group">
-                        <button class="button button__red">
+                        <button id="submit" class="button button__red">
                             Enviar meus dados <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="268.832px" height="268.832px" viewBox="0 0 268.832 268.832" style="enable-background:new 0 0 268.832 268.832;" xml:space="preserve"><g><path d="M265.171,125.577l-80-80c-4.881-4.881-12.797-4.881-17.678,0c-4.882,4.882-4.882,12.796,0,17.678l58.661,58.661H12.5c-6.903,0-12.5,5.597-12.5,12.5c0,6.902,5.597,12.5,12.5,12.5h213.654l-58.659,58.661c-4.882,4.882-4.882,12.796,0,17.678 c2.44,2.439,5.64,3.661,8.839,3.661s6.398-1.222,8.839-3.661l79.998-80C270.053,138.373,270.053,130.459,265.171,125.577z"/></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>
                         </button>
                     </div>

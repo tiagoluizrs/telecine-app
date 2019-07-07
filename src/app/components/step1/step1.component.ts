@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
-import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-step1',
@@ -13,22 +12,26 @@ import { environment } from './../../../environments/environment';
 })
 export class Step1Component implements OnInit {
   loginForm: FormGroup;
-  submitted = false;
   returnUrl: string;
-  sendgrid_api_key: string = environment.sendgrid_api_key;
   states: any;
   cities: any;
   cities_state: any;
-  select_disable: boolean = true;
+
+  // Boleanos que realizam verificação no component html
+  submitted: boolean = false;
   cpf_length: boolean = true;
   birthday_length: boolean = true;
+  select_state_disable: boolean = true;
+  select_city_disable: boolean = true;
+  hide_preload_state: boolean = false;
+  hide_preload_city: boolean = true;
 
   constructor(
     private seoService: SeoService,
     private httpService: HttpService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
+    private router: Router
   ){
     this.setMetaTag();
   }
@@ -59,8 +62,12 @@ export class Step1Component implements OnInit {
 
     this.httpService.get("https://demo3127152.mockable.io/states", headers).subscribe((data: any) => {
       this.states = data;
+      this.hide_preload_state = true
+      this.select_state_disable = false
     },(error) => {
         this.states = null;
+        this.hide_preload_state = true
+        alert("Um erro ocorreu ao tentar carregar os estados.")
         console.log(`[[Step1Component | getCities ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
       }
     );
@@ -83,14 +90,18 @@ export class Step1Component implements OnInit {
   get f() { return this.loginForm.controls; }
 
   changeState(e){
+    this.hide_preload_city = true;
     // TODO - Criar o reset do select ao trocar de estado
     if(e == null  || e == undefined || e == ''){
-      this.select_disable = true;
+      this.select_city_disable = true;
+      alert("Erro ao carregar cidades.")
     }else{
       let id = e.split(',')[0]
       this.cities_state = this.cities[id];
-      this.select_disable = false;
+      this.select_city_disable = false;
     }
+
+    this.hide_preload_city = true;
   }
 
   verify_field_size(size, field):void{
@@ -143,8 +154,6 @@ export class Step1Component implements OnInit {
       'state': state,
       'city': this.f.city.value
     })
-
-    console.log(this.f.state)
     this.router.navigate(['/step2'], { queryParams:  { step2_enabled: true }, skipLocationChange: true});
   }
 

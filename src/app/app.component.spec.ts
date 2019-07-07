@@ -14,22 +14,29 @@ describe('AppComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', () => {
+  it('Verificando criação do App', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'telecine-app'`, () => {
+  it(`Verificando título do app'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('telecine-app');
-  });
+    expect(app.title).toEqual('Assine Telecine');
+  }));
 
-  it('should render title in a h1 tag', () => {
+  it('Verificando se h4 está ok', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to telecine-app!');
+    expect(compiled.querySelector('h4').textContent).toContain('Ficou com alguma dúvida?');
+  });
+
+  it('Verificando texto do link de ajuda', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('.footer__help__link').textContent).toContain('Acesse nossa ajuda');
   });
 });

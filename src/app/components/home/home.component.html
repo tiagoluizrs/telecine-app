@@ -3,6 +3,9 @@
     <!-- [style.backgroundImage]='"url(" + current_banner_image + ")"' -->
     <div class="content content__banner">
         <div class="background__image">
+            <!-- <img 
+            [src]="current_banner.image"
+            alt="{{current_banner.title}}" rel="preload"> -->
             <img 
             [defaultImage]="defaultBanner"
             [lazyLoad]="current_banner.image"
