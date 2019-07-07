@@ -86,6 +86,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
             'title': this.movies[1]['titulo_portugues'],
           },
         ];
+
+        console.log(this.highlights)
       }
       this.initializeCarousel();
     },(error) => {
