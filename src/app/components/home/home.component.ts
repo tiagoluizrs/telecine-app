@@ -39,13 +39,13 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ){
     this.setMetaTag();
     this.configure_sizes();
-    this.getMovies();
   } 
 
   ngOnInit() {
     setInterval(() => {
       this.cdr.detectChanges();
     }, 2000);
+    this.getMovies();
   }
 
   ngAfterViewInit() {
