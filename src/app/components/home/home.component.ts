@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
 import { Observable } from 'rxjs';
@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./home.component.sass']
 })
 
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   defaultBanner: string = '/assets/img/defaultBanner.png';
-  defaultCarousel: string = '/assets/img/defaultCarousel.png';
   defaultBox: string = '/assets/img/defaultBox.png';
   movies: Observable<Array<any>>;
   slideConfig: any;
@@ -35,15 +35,21 @@ export class HomeComponent implements OnInit {
   constructor(
     private seoService: SeoService,
     private httpService: HttpService,
-    private elRef:ElementRef,
-    private renderer: Renderer2
+    private cdr: ChangeDetectorRef
   ){
     this.setMetaTag();
+    this.configure_sizes();
+    this.getMovies();
   } 
 
   ngOnInit() {
-    this.configure_sizes();
-    this.getMovies();
+    setInterval(() => {
+      this.cdr.detectChanges();
+    }, 2000);
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detach();
   }
 
   configure_sizes(): void{
