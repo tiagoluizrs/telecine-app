@@ -48,11 +48,11 @@ Com isso podemos executar o seguinte comando para rodar o projeto em nossa máqu
 user@user-Machine-name:~/Documentos/Projetos/telecine-app$ ng serve
 ```
 
-1. Após rodar seu terminal ficará parecido com esse.
+1. Após rodar seu terminal ficará parecido com esse:
 ![Terminal rodando {w=100%}](src/assets/img/documentation/terminal_running_app.png)
 
 
-2. Abra o navegador e adicione o endereço que aparece no terminal. Por padrão o angular roda no endereço http://localhost:4200/.
+2. Abra o navegador e adicione o endereço que aparece no terminal. Por padrão o angular roda no endereço [http://localhost:4200/](http://localhost:4200/):
 ![Browser rodando {w=100%}](src/assets/img/documentation/browser_running_app.png)
 
 ## Rodando os testes unitários {#Tópico3}
@@ -97,6 +97,8 @@ user@user-Machine-name:~/Documentos/Projetos/telecine-app$ ng test --watch=true 
 ```
 
 Você também pode optar por deixar o `--watch=false` para que o teste unitário rode apenas uma vez e depois pare.
+
+> Caso deseje saber a cobertura de código que seu teste está abrangendo use a opção `--codeCoverage=true` ao rodar o ng test.
 
 ## Gerando o build da aplicação {#Tópico4}
 
@@ -161,6 +163,6 @@ module.exports = function(grunt){
 }
 ``` 
 
-1. Após executar o `gruntfile.js` você verá seu terminal similar ao da imagem à seguir
+1. Após executar o `gruntfile.js` você verá seu terminal similar ao da imagem à seguir:
 
 ![Terminal rodando o gruntfile.js {w=100%}](src/assets/img/documentation/terminal_running_gruntfile.png)

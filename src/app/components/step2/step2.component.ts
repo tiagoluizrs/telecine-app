@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+// Serviço próprios do projeto
 import { SeoService } from '../../services/Seo/seo.service';
 
 @Component({
@@ -13,6 +15,7 @@ export class Step2Component implements OnInit {
     private router: Router,
     private seoService: SeoService
   ){
+    this.seoService.setTitlePage('Assina Telecine - Obrigado por experimentar');
     this.setMetaTag();
     this.validate_step2();
   }
@@ -20,6 +23,11 @@ export class Step2Component implements OnInit {
   ngOnInit() {
   }
 
+  /*
+  Usamos esse método para verificar se o usuário está acessando essa página por url ou se foi o formulário
+  da página /experimentar que o trouxe aqui. Só poderá ver essa página que tiver vindo pelo onsubmit
+  que ocorre na página /experimentar.
+  */
   validate_step2(): void{
     this.route.queryParams.subscribe(params => {
       if(!params['step2_enabled']){
@@ -30,13 +38,12 @@ export class Step2Component implements OnInit {
 
   setMetaTag(): void{
     let metatags = [
-      {name: 'description', content: 'Experimente por 7 dias e assine o Telecine Play. São mais de 1900 filmes para você assistir online. Uma nova experiência de filmes chegou.'},   
-      {name: 'viewport', content: 'width=device-width, initial-scale=1'},   
-      {name: 'robots', content: 'NOINDEX'},
-      {name: 'author', content: 'Telecine'},
+      {charset: 'UTF-8'},
       {httpEquiv: 'Content-Type', content: 'text/html'},
-      {property: 'og:type', content: "website"},
-      {charset: 'UTF-8'}
+      {httpEquiv: 'X-UA-Compatible', content: 'IE=edge,chrome=1, minimum-scale=1'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},   
+      {name: 'robots', content: 'noindex'},
+      {name: 'robots', content: 'googlebot'}
     ];
 
     for(let metatag of metatags){

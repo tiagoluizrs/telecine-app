@@ -10,6 +10,18 @@ export class HttpService {
     private http: HttpClient
   ) {}
 
+  /* Método para realizar uma requisição get
+    Para funcionar você precisará passar os seguintes parâmetros:
+      - url: Uma string com a url que será requisitada;
+      - header: Um objeto json com os itens que precisam estar no cabeçalho.
+    
+    Exemplos:
+    url = 'sua url'
+    headers = { 'Content-Type': 'application/json' }
+
+    Ela retornará um objeto de tipo Observable que poderá ser recebido
+    por uma variável de tipo Observable ou any. 
+  */
   get(url: string, headers: any): Observable<any> {
     let header_object = new HttpHeaders(headers);
 

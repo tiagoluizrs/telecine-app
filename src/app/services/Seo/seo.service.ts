@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Meta } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SeoService {
-  users: any;
-
-  constructor(private meta: Meta) {
-    
+  constructor(
+    private meta: Meta,
+    private titleService: Title
+    ) {
+    }
+  
+  // Método que serve para adicionar o título de página html
+  setTitlePage(title: string): void{
+    this.titleService.setTitle(title)
   }
 
+  // Método para pegar uma metatag pelo seu nome
   getMetaTags(tag_name: string) {
     let els: HTMLMetaElement[];
 
@@ -18,7 +24,7 @@ export class SeoService {
       els = this.meta.getTags(tag_name);
       return els;
     } catch (error) {
-      console.log(`[[SeoService | getMetaTags]] >> Um erro ocorreu durante a criação das meta tags. Descrição do erro: ${error}`);
+      console.log(`[[SeoService | getMetaTags]] >> Um erro ocorreu durante o get da tag ${tag_name}. Descrição do erro: ${error}`);
       return {
         'name': undefined,
         'content': undefined
@@ -26,7 +32,17 @@ export class SeoService {
     }
   } 
 
-  setMetaTag(data: any, force: boolean){
+  /* Método para criar uma ou mais metatags
+    Passe um array com os objetos json desejados no parâmetro data. Force forçará a criação da metatag.
+    
+    Exemplos:
+    data = [
+      {httpEquiv: 'value', content: 'value'}
+      {property: 'value', content: 'value'}
+      {name: 'value', content: 'value'}
+    ]
+  */
+  setMetaTag(data: any, force: boolean): void{
     try {
       this.meta.addTags(data, force);
     } catch (error) {
@@ -34,7 +50,18 @@ export class SeoService {
     } 
   }
 
-  updateMetaTags(data: any){
+  /* Método para atualizar uma ou mais metatags
+    Passe o objeto json que deseje atualizar no parâmetro data. 
+    Se alguma metatag não existir, a mesma será criada.
+    
+    Exemplos:
+    data = [
+      {httpEquiv: 'value', content: 'value'}
+      {property: 'value', content: 'value'}
+      {name: 'value', content: 'value'}
+    ]
+  */
+  updateMetaTags(data: any): void{
     try {
       this.meta.updateTag(data);
     } catch (error) {
@@ -42,7 +69,10 @@ export class SeoService {
     } 
   }
 
-  removeMetaTags(meta_tag: string) {
+  /* Método para remover uma metatag
+    Passe o nome da chave dessa metatag. 
+  */
+  removeMetaTags(meta_tag: string): void{
     try {
       this.meta.removeTag(`name = "${meta_tag}"`);
     } catch (error) {

@@ -13,11 +13,11 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'step1',
+    path: 'experimentar',
     component: Step1Component
   },
   {
-    path: 'step2',
+    path: 'cadastro-concluido',
     component: Step2Component
   },
   {
