@@ -47,3 +47,5 @@ Thumbs.db
 
 src/environments/environment.prod.ts
 src/environments/environment.ts
+/e2e
+/.grunt

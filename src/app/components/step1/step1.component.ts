@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Observable, interval, throwError, of } from 'rxjs';
+import { retryWhen, flatMap } from 'rxjs/operators'
+
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
 
@@ -13,8 +16,8 @@ import { HttpService } from '../../services/Http/http.service';
 export class Step1Component implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
-  states: any;
-  cities: any;
+  states: Observable<Array<any>>;
+  cities: Observable<Array<any>>;
   cities_state: any;
 
   // Boleanos que realizam verificação no component html
@@ -25,6 +28,7 @@ export class Step1Component implements OnInit {
   select_city_disable: boolean = true;
   hide_preload_state: boolean = false;
   hide_preload_city: boolean = true;
+  connection_lost: boolean = false;
 
   constructor(
     private seoService: SeoService,
@@ -60,14 +64,26 @@ export class Step1Component implements OnInit {
       'Content-Type': 'application/json'
     }
 
-    this.httpService.get("https://demo3127152.mockable.io/states", headers).subscribe((data: any) => {
+    this.httpService.get("https://demo3127152.mockable.io/states", headers)
+    .pipe(retryWhen(_ => {
+      return interval(3000).pipe(
+        flatMap(count => count == 10 ? throwError('Número de tentativas excedido. Verifique sua conexão e tente novamente.') : of(count))
+      )
+    }))
+    .subscribe((data: any) => {
       this.states = data;
       this.hide_preload_state = true
       this.select_state_disable = false
     },(error) => {
         this.states = null;
         this.hide_preload_state = true
-        alert("Um erro ocorreu ao tentar carregar os estados.")
+
+        if(error == 'Número de tentativas excedido. Verifique sua conexão e tente novamente.' && !this.connection_lost){
+          alert(error)
+          this.connection_lost = true
+        }else if(!this.connection_lost){
+          alert('Um erro ocorreu ao tentar carregar os estados.')
+        }
         console.log(`[[Step1Component | getCities ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
       }
     );
@@ -78,10 +94,23 @@ export class Step1Component implements OnInit {
       'Content-Type': 'application/json'
     }
 
-    this.httpService.get("https://demo3127152.mockable.io/cities", headers).subscribe((data: any) => {
+    this.httpService.get("https://demo3127152.mockable.io/cities", headers)
+    .pipe(retryWhen(_ => {
+      return interval(3000).pipe(
+        flatMap(count => count == 10 ? throwError('Número de tentativas excedido. Verifique sua conexão e tente novamente.') : of(count))
+      )
+    }))
+    .subscribe((data: any) => {
       this.cities = data;
     },(error) => {
         this.cities = null;
+
+        if(error == 'Número de tentativas excedido. Verifique sua conexão e tente novamente.' && !this.connection_lost){
+          alert(error)
+          this.connection_lost = true
+        }else if(!this.connection_lost){
+          alert('Um erro ocorreu ao tentar carregar os estados.')
+        }
         console.log(`[[Step1Component | getCities ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
       }
     );
@@ -90,8 +119,8 @@ export class Step1Component implements OnInit {
   get f() { return this.loginForm.controls; }
 
   changeState(e){
-    this.hide_preload_city = true;
-    // TODO - Criar o reset do select ao trocar de estado
+    this.hide_preload_city = false;
+
     if(e == null  || e == undefined || e == ''){
       this.select_city_disable = true;
       alert("Erro ao carregar cidades.")

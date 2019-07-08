@@ -8,3 +8,4 @@ Verificar se algum arquivo modificado está no gitignore e explicar o que deve s
 sudo apt-get install npm
 
 install angular
+npm install phantomjs --save-dev

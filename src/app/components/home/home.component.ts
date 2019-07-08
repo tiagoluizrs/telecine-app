@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SeoService } from '../../services/Seo/seo.service';
 import { HttpService } from '../../services/Http/http.service';
-import { Observable } from 'rxjs';
+import { Observable, interval, throwError, of } from 'rxjs';
+import { retryWhen, flatMap } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -10,8 +11,6 @@ import { Observable } from 'rxjs';
 })
 
 export class HomeComponent implements OnInit {
-  defaultBanner: string = '/assets/img/defaultBanner.png';
-  defaultBox: string = '/assets/img/defaultBox.png';
   movies: Observable<Array<any>>;
   slideConfig: any;
   window_size: number;
@@ -61,13 +60,20 @@ export class HomeComponent implements OnInit {
       'Content-Type': 'application/json'
     }
 
-    this.httpService.get("https://demo3127152.mockable.io/movies", headers).subscribe((data: any) => {
+    this.httpService.get("https://demo3127152.mockable.io/movies", headers)
+    .pipe(retryWhen(_ => {
+      return interval(3000).pipe(
+        flatMap(count => count == 10 ? throwError('Número de tentativas excedido. Verifique sua conexão e tente novamente.') : of(count))
+      )
+    }))
+    .subscribe((data: any) => {
       this.movies = data;
       if(data.length > 0){
         this.current_banner = {
           'image': this.movies[0][this.movie_sizes.banner],
           'title': this.movies[0]['titulo_portugues'],
         };
+
         this.highlights = [
           {
             'wallpaper': this.movies[0]['wallpaper'],
@@ -81,7 +87,10 @@ export class HomeComponent implements OnInit {
       }
       this.initializeCarousel();
     },(error) => {
-      this.movies = null;
+        if(error == 'Número de tentativas excedido. Verifique sua conexão e tente novamente.'){
+          alert(error);
+        }
+        this.movies = null;
         console.log(`[[HomeComponent | getMovies]] >> Um erro ocorreu durante o carregamento dos filmes. Descrição do erro: ${error}`);
       }
     );
