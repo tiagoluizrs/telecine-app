@@ -1,6 +1,6 @@
 # Projeto Landing Page Assine Telecine - Manual de configuração
 
-**Url do projeto: [telecine-app.herokuapp.com/](telecine-app.herokuapp.com/)**
+**Url do projeto: [telecine-app.herokuapp.com/](http://telecine-app.herokuapp.com/)**
 
 
 Essa documentação destina-se à auxiliar no correto manuseio do projeto.
