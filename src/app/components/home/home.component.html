@@ -29,6 +29,12 @@
                     <img [src]="movie.poster_p" alt="{{ movie.titulo_portugues }}" width="100%" rel="preload">
                 </div>
             </ngx-slick-carousel>
+
+
+            <div [ngClass]="{'hide': hide_preload_carousel==true, 'show': hide_preload_carousel==false}" class="preloader_carousel show">
+                <img src="../../../assets/img/preloader.gif" alt="Carregando carousel">
+                <p>Carregando carousel</p>
+            </div>
         </div>
         <div class="content devices">
             <div class="col md__12 lg__12">

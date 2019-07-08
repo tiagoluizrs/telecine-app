@@ -16,14 +16,12 @@ import { HttpService } from '../../services/Http/http.service';
 export class Step1Component implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
-  states: Observable<Array<any>>;
-  cities: Observable<Array<any>>;
+  states: any;
+  cities: any;
   cities_state: any;
 
   // Boleanos que realizam verificação no component html
   submitted: boolean = false;
-  cpf_length: boolean = true;
-  birthday_length: boolean = true;
   select_state_disable: boolean = true;
   select_city_disable: boolean = true;
   hide_preload_state: boolean = false;
@@ -49,9 +47,9 @@ export class Step1Component implements OnInit {
   initForm(){
     this.loginForm = this.formBuilder.group({
         name: ['', Validators.required],
-        email: ['', Validators.required],
-        cpf: ['', Validators.required],
-        birthday: ['', Validators.required],
+        email: ['', [Validators.required, Validators.pattern(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i)]],
+        cpf: ['', [Validators.required, Validators.pattern(/^\w{11,11}$/)]],
+        birthday: ['', [Validators.required, Validators.pattern(/^\w{8,8}$/)]],
         city: ['', Validators.required],
         state: ['', Validators.required]
     });
@@ -133,43 +131,15 @@ export class Step1Component implements OnInit {
     this.hide_preload_city = true;
   }
 
-  verify_field_size(size, field):void{
-    if(field == 'cpf'){
-      field = this.f.cpf.value;
-
-      if((field.length < size && field.length > 0) && this.cpf_length == false){
-        this.cpf_length = false
-      }else{
-        this.cpf_length = true
-      }
-    }else if(field == 'birthday'){
-      field = this.f.birthday.value;
-
-      if((field.length < size && field.length > 0) && this.birthday_length == false){
-        this.birthday_length = false
-      }else{
-        this.birthday_length = true
-      }
-    }
-
-    
-  }
-
   onSubmit() {
-    let state = this.f.state.value.split(',')[1];
-    let cpf = this.f.cpf.value;
-    let birthday = this.f.birthday.value;
+    let state: string = this.f.state.value.split(',')[1];
+    let cpf: string = this.f.cpf.value;
+    let birthday: string = this.f.birthday.value;
+
+    // Formatação do birthday para 00/00/0000, pois a máscara do front-end não preserva as barras/
+    birthday = `${birthday[0]}${birthday[1]}/${birthday[2]}${birthday[3]}/${birthday[4]}${birthday[5]}${birthday[6]}${birthday[7]}`;
     
-    // TODO - Criar validação para quando não for adicionado um email, quando o cpf não for preenchido por completo e para a data de nascimento
     this.submitted = true;
-
-    if(cpf.length < 11 && cpf.length > 0){
-      this.cpf_length = false
-    }
-
-    if(birthday.length < 8 && birthday.length > 0){
-      this.birthday_length = false
-    }
 
     if (this.loginForm.invalid) {
         return;

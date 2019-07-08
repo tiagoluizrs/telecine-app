@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
     },
   ];
   movie_sizes: any = {  banner: 'hero3x1' };
+  hide_preload_carousel: boolean = false;
 
   constructor(
     private seoService: SeoService,
@@ -42,16 +43,19 @@ export class HomeComponent implements OnInit {
     this.getMovies();
   }
 
-
   configure_sizes(): void{
-    this.window_size = window.innerWidth;
+    try{
+      this.window_size = window.innerWidth;
 
-    if(this.window_size > 768){
-      this.movie_sizes.banner = 'hero3x1';
-    }else if(this.window_size < 768 && this.window_size > 360){
-      this.movie_sizes.banner = 'hero3x1';
-    }else{
-      this.movie_sizes.banner = 'hero4x3';
+      if(this.window_size > 768){
+        this.movie_sizes.banner = 'hero3x1';
+      }else if(this.window_size < 768 && this.window_size > 360){
+        this.movie_sizes.banner = 'hero3x1';
+      }else{
+        this.movie_sizes.banner = 'hero4x3';
+      }
+    }catch(error){
+      console.log(`[[HomeComponent | configure_sizes]] >> Um erro ocorreu no momento da definição do tamanho do banner. Descrição do erro: ${error}`);
     }
   }
 
@@ -86,11 +90,13 @@ export class HomeComponent implements OnInit {
         ];
       }
       this.initializeCarousel();
+      this.hide_preload_carousel = true;
     },(error) => {
         if(error == 'Número de tentativas excedido. Verifique sua conexão e tente novamente.'){
           alert(error);
         }
         this.movies = null;
+        this.hide_preload_carousel = true;
         console.log(`[[HomeComponent | getMovies]] >> Um erro ocorreu durante o carregamento dos filmes. Descrição do erro: ${error}`);
       }
     );

@@ -2,7 +2,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-shell')
     grunt.initConfig({
         shell: {
-            deploy: {
+            build: {
                 options: { stdout: true },
                 command: [
                     'echo "=================== Realizando testes unitários ==================="',

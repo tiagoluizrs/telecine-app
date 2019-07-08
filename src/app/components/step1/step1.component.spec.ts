@@ -41,6 +41,17 @@ describe('Step1Component', () => {
     fixture.detectChanges();
   });
 
+  it('Verificando o formulário válido', async() => {
+    component.loginForm.controls['name'].setValue('Tiago Luiz');
+    component.loginForm.controls['email'].setValue('tiagoluizribeirodasilva@gmail.com');
+    component.loginForm.controls['cpf'].setValue('14722549702');
+    component.loginForm.controls['birthday'].setValue('27061995');
+    component.loginForm.controls['city'].setValue('Rio de Janeiro');
+    component.loginForm.controls['state'].setValue('Rio de Janeiro');
+
+    expect(component.loginForm.valid).toBeTruthy();
+  })
+
   it('Verificando texto do formulário de experimente por 7 dias.', () => {
     fixture.detectChanges();
     expect(compiled.querySelector('p').textContent.trim()).toEqual('Para começar a usar seus 7 dias grátis precisamos de alguns dados.');
@@ -54,17 +65,6 @@ describe('Step1Component', () => {
     component.loginForm.controls['city'].setValue('');
 
     expect(component.loginForm.valid).toBeFalsy();
-  })
-
-  it('Verificando o formulário válido', async() => {
-    component.loginForm.controls['name'].setValue('Tiago Luiz');
-    component.loginForm.controls['email'].setValue('tiagoluizribeirodasilva@gmail.com');
-    component.loginForm.controls['cpf'].setValue('147.225.497-02');
-    component.loginForm.controls['birthday'].setValue('27/06/1995');
-    component.loginForm.controls['city'].setValue('Rio de Janeiro');
-    component.loginForm.controls['state'].setValue('Rio de Janeiro');
-
-    expect(component.loginForm.valid).toBeTruthy();
   })
 
   it('Chamando o método onSubmit', async()=> {
