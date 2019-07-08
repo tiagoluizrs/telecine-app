@@ -110,7 +110,7 @@ export class Step1Component implements OnInit {
         }else if(!this.connection_lost){
           alert('Um erro ocorreu ao tentar carregar os estados.')
         }
-        console.log(`[[Step1Component | getCities ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
+        console.log(`[[Step1Component | getStates ]] >> Um erro ocorreu durante o carregamento dos estados. Descrição do erro: ${error}`);
       }
     );
   }

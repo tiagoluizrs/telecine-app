@@ -138,7 +138,6 @@ export class HomeComponent implements OnInit {
       setTimeout(function(){
         e.slickGoTo(0)
       }, 1000)
-      console.log(`[[HomeComponent | slickInit]] >> Um erro ocorreu no momento em que o item 0 do carousel foi ativado. Descrição do erro: ${error}`);
     }
   }
 
