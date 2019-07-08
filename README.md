@@ -2,14 +2,14 @@
 
 Essa documentação destina-se à auxiliar no correto manuseio do projeto.
 
-* [Instalando os componenents do projeto](#topic1)
-* [Instalando os módulos e rodando o projeto](#topic2)
-* [Rodando os testes](#topic3)
-* [Gerando o build da aplicação](#topic4)
-* [Rodando o gruntfile](#topic5)
+* [Instalando os componenents do projeto](#Tópico1)
+* [Instalando os módulos e rodando o projeto](#Tópico2)
+* [Rodando os testes](#Tópico3)
+* [Gerando o build da aplicação](#Tópico4)
+* [Rodando o gruntfile](#Tópico5)
 
 
-## Instalando os componenents do projeto {#topic1}
+## Instalando os componenents do projeto {#Tópico1}
 
 Para rodar o projeto em sua máquina você precisará instalar os seguintes componentes em sequência:
 
@@ -32,7 +32,7 @@ Agora que temos o node instalado, rode o comando à seguir para instalar o angul
 user@user-Machine-name:~$ sudo npm install -g @angular/cli@8.1.0
 ```
 
-## Instalando os módulos e rodando o projeto {#topic2}
+## Instalando os módulos e rodando o projeto {#Tópico2}
 
 Para instalar os módulos do seu projeto basta rodar o seguinte comando dentro da pasta d projeto:
 
@@ -52,10 +52,10 @@ user@user-Machine-name:~/Documentos/Projetos/telecine-app$ ng serve
 ![Terminal rodando {w=100%}](src/assets/img/documentation/terminal_running_app.png)
 
 
-2. Abra o navegador e adicione o endereço que aparece no terminal. Por padrão o angular roda no endereço `http://localhost:4200/`.
+2. Abra o navegador e adicione o endereço que aparece no terminal. Por padrão o angular roda no endereço http://localhost:4200/.
 ![Browser rodando {w=100%}](src/assets/img/documentation/browser_running_app.png)
 
-## Rodando os testes unitários{#topic3}
+## Rodando os testes unitários {#Tópico3}
 
 Para rodar nossos testes unitários você precisará ter o Google Chrome instalado. Caso ainda não tenha, siga os próximos passos, caso tenha, pule para a etapa seguinte a ele:
 
@@ -98,7 +98,7 @@ user@user-Machine-name:~/Documentos/Projetos/telecine-app$ ng test --watch=true 
 
 Você também pode optar por deixar o `--watch=false` para que o teste unitário rode apenas uma vez e depois pare.
 
-## Gerando o build da aplicação {#topic4}
+## Gerando o build da aplicação {#Tópico4}
 
 Para gerar o build da aplicação é muito simples. Siga os próximos passos para gerá-lo em desenvolvimento e produto: 
 
@@ -120,7 +120,7 @@ user@user-Machine-name:~/Documentos/Projetos/telecine-app$ ng build --prod --aot
 Esses comandos irão compilar o projeto angular em um diretório chamado `dist`, dentro dele haverá uma pasta com o nome do projeto `telecine-app`, dentro desta pasta estarão todos os arquivos criados. Para mais dúvidas sobre o ng build consulte [Angular build](https://angular.io/cli/build)
 
 
-## Rodando o gruntfile {#topic5}
+## Rodando o gruntfile {#Tópico5}
 
 O `gruntfile.js` foi um arquivo criado para automatizar nosso processo final. Ele assegurará que só faremos um build do projeto para produção se a aplicação for bem-sucedida em todos os testes unitários. 
 
