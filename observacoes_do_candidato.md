@@ -17,6 +17,6 @@ Segue print com análise de acessibilidade do site seguindo as diretrizes de `WC
 ## Otimização
 
 Análise feita no site [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/?hl=pt-BR&url=http%3A%2F%2Ftelecine-app.herokuapp.com&tab=desktop)
-![Análise de Otimização de SEO 2.0 {w=100%}](src/assets/img/documentation/acessibilidade_wcag2.png)
+![Otimização Desktop {w=100%}](src/assets/img/documentation/otimizacao_desktop.png)
 
-## SEO
+![Otimização Mobile {w=100%}](src/assets/img/documentation/otimizacao_mobile.png)
