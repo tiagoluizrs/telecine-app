@@ -185,6 +185,7 @@ export class HomeComponent implements OnInit {
       {name: 'description', content: 'Experimente por 7 dias e assine o Telecine Play. São mais de 1900 filmes para você assistir online. Uma nova experiência de filmes chegou.'},   
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},   
       {name: 'author', content: 'Telecine'},
+      {name: 'keywords', content: 'Filmes'},
       {name: 'theme-color', content: '#333'},
       {name: 'application-name', content: 'Assina Telecine Play'},
       {name: 'robots', content: 'index,follow'},
@@ -195,6 +196,9 @@ export class HomeComponent implements OnInit {
       {property: 'og:site_name', content: "Assina Telecine Play"},
       {property: 'og:locale', content: "pt_BR"},
       {property: 'og:image', content: "http://telecine-app.herokuapp.com/assets/img/banner_og.png"},
+      {property: 'og:image:type', content: "image/png"},
+      {property: 'og:image:width', content: "http://telecine-app.herokuapp.com/assets/img/banner_og.png"},
+      {property: 'og:image:height', content: "http://telecine-app.herokuapp.com/assets/img/banner_og.png"},
       {name: 'twitter:card', content: 'redetelecine'},
       {name: 'twitter:site', content: 'summary'}
     ];

@@ -62,15 +62,23 @@ Para rodar nossos testes unitários você precisará ter o Google Chrome instala
 **Instalando o chrome**
 
 Faça o download do arquivo `.deb` em seu computador. Recomendo fazer isso na pasta de `downloads`.
+É só acessar o link [Google Chrome](https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb)
 
+
+Se preferir pode usar o comando `wget` para baixar:
 ```console
 user@user-Machine-name:~/Downloads$ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 ```
 
-Agora instale o pacote:
+
+> As vezes ocorre erro ao fazer pelo wget, por isso recomendo usar o navegador. 
+
+
+Agora dentro da pasta em que você baixoy o arquivo rode o seguinte comando:
 ```console
 user@user-Machine-name:~/Downloads$ sudo dpkg -i google-chrome-stable_current_amd64.deb
 ```
+
 
 Pronto, agora seu Google Chrome está instalado.
 

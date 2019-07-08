@@ -52,7 +52,7 @@ describe('HomeComponent', () => {
     let banner_a = compiled.querySelector('.banner a')
     
     expect(banner_a.textContent.trim()).toEqual('Experimente Grátis');
-    expect(compiled.querySelector('.banner a').getAttribute('routerLink')).toEqual('/step1');
+    expect(compiled.querySelector('.banner a').getAttribute('routerLink')).toEqual('/experimentar');
   });
 
   it('Verificando textos das box', () => {
