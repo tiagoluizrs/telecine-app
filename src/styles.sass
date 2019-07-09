@@ -87,33 +87,36 @@
             top: 2px
         
 /* Padrões do carousel */
-.slick-slide
-    margin: 0 20px
-    box:
-        shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.8)
+.slick-list 
+    padding: 45px 60px !important
+    .slick-slide
+        margin: 0 20px
+        outline: none
+        border:
+            radius: 10px
+        box:
+            shadow: 1px 1px 6px 1px rgba(0, 0, 0, 0.8)
+        &.slick-center
+            -webkit-transform: scale(1.10)
+            -moz-transform: scale(1.10)
+            transform: scale(1.10)   
+            margin-top: -10px
+        img
+            border:
+                radius: 10px
+            outline: none
 
-.slick-dots
+.slick-dotted.slick-slider
+    margin:
+        bottom: 0px !important
+
+.slick-dots 
     position: relative !important
     bottom: 0 !important
     width: 90% !important
     margin:
         left: 5% !important
         right: 5% !important
-
-.slick-dotted.slick-slider
-    margin:
-        bottom: 0px !important
-
-.slick-center
-    -webkit-transform: scale(1.10)
-    -moz-transform: scale(1.10)
-    transform: scale(1.10)   
-    margin-top: -10px
- 
-.slick-list 
-    padding: 45px 60px !important
-
-.slick-dots 
     li 
         &.slick-active
             width: 45px !important
