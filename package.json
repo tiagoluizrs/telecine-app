@@ -1,6 +1,6 @@
 {
   "name": "telecine-app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
