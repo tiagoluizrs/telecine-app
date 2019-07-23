@@ -15,5 +15,5 @@ module.exports = function(grunt){
         }
     });
  
-    grunt.registerTask('default', ['shell:deploy']);
+    grunt.registerTask('default', ['shell:build']);
 }
