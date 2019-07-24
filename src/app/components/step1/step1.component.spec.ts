@@ -42,9 +42,9 @@ describe('Step1Component', () => {
   });
 
   it('Verificando o formulário válido', async() => {
-    component.loginForm.controls['name'].setValue('Tiago Luiz');
-    component.loginForm.controls['email'].setValue('tiagoluizribeirodasilva@gmail.com');
-    component.loginForm.controls['cpf'].setValue('14722549702');
+    component.loginForm.controls['name'].setValue('João Felipe');
+    component.loginForm.controls['email'].setValue('email@gmail.com');
+    component.loginForm.controls['cpf'].setValue('18103973084');
     component.loginForm.controls['birthday'].setValue('27061995');
     component.loginForm.controls['city'].setValue('Rio de Janeiro');
     component.loginForm.controls['state'].setValue('Rio de Janeiro');
