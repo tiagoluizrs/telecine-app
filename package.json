@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "grunt-shell": "^3.0.1",
     "intl": "^1.2.5",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "karma-coverage-istanbul-reporter": "^2.0.5",
     "ng-lazyload-image": "^6.0.0",
     "ngx-mask": "^8.0.1",
