@@ -48,7 +48,7 @@
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "enhanced-resolve": "^3.3.0",
-    "grunt": "^0.4.5",
+    "grunt": "^1.5.2",
     "jasmine-core": "~3.4.0",
     "karma": "^4.1.0",
     "karma-chai": "^0.1.0",
